@@ -74,6 +74,8 @@ sub sprintf_length {
 
         if ($fmt && defined $sprintf_width) {
 
+            # XXX check if width = *
+
             if ($conv eq '%' || $conv eq 'c') {
                 $width //= 1;
             } elsif ($conv eq 'p' || $conv eq 'c') {
@@ -83,7 +85,7 @@ sub sprintf_length {
             }
 
             if (defined $width) {
-                $sprintf_width += $width - length($all);
+                $sprintf_width += abs($width) - length($all);
             } else {
                 $sprintf_width = undef;
             }
